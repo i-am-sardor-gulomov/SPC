@@ -4,8 +4,8 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\v1\App;
-use App\Http\Requests\StoreAppRequest;
-use App\Http\Requests\UpdateAppRequest;
+use App\Http\Requests\v1\StoreAppRequest;
+use App\Http\Requests\v1\UpdateAppRequest;
 
 class AppController extends Controller
 {
@@ -16,7 +16,7 @@ class AppController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
