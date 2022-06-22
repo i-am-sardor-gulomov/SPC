@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\v1\App;
+use App\Models\v1\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateCredentialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +15,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('credentials', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('login');
             $table->string('password');
-            $table->enum('status', ['admin', 'developer'])->default('developer');
+            $table->foreignIdFor(User::class, 'user_id');
+            $table->foreignIdFor(App::class, 'app_id');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('credentials');
     }
 }
