@@ -31,5 +31,12 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensExpireIn(now()->addDays(1));
         Passport::refreshTokensExpireIn(now()->addDays(2));
         Passport::personalAccessTokensExpireIn(now()->addDays(15));
+
+        Passport::tokensCan([
+            'admin' => "Barcha imkoniyatlar",
+            'developer' => "Faqat foydalanish",
+        ]);
+
+        Passport::setDefaultScope(['developer']);
     }
 }
