@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\v1\App;
 use App\Http\Requests\v1\StoreAppRequest;
 use App\Http\Requests\v1\UpdateAppRequest;
+use App\Http\Resources\v1\AppResource;
 
 class AppController extends Controller
 {
@@ -16,7 +17,7 @@ class AppController extends Controller
      */
     public function index()
     {
-        
+        return AppResource::collection(App::all());
     }
 
     /**
@@ -27,7 +28,9 @@ class AppController extends Controller
      */
     public function store(StoreAppRequest $request)
     {
-        //
+        $app = App::create($request->all());
+
+        return response($app, 201);
     }
 
     /**
@@ -38,7 +41,7 @@ class AppController extends Controller
      */
     public function show(App $app)
     {
-        //
+        return new AppResource($app);
     }
 
     /**
@@ -50,7 +53,14 @@ class AppController extends Controller
      */
     public function update(UpdateAppRequest $request, App $app)
     {
-        //
+        $app->update([
+            'name' => $request->name??$app->name,
+            'description' => $request->description??$app->description,
+            'front_url' => $request->front_url??$app->front_url,
+            'back_url' => $request->back_url??$app->back_url,
+        ]);
+
+        return $app;
     }
 
     /**
@@ -61,6 +71,9 @@ class AppController extends Controller
      */
     public function destroy(App $app)
     {
-        //
+        $name = $app->name;
+        $app->delete();
+
+        return response(['name'=>$name], 204);
     }
 }

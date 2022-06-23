@@ -13,7 +13,7 @@ class StoreAppRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return (auth()->check() and $this->user()->tokenCan('admin'));
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreAppRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'description' => 'string',
+            'front_url' => 'required|string',
+            'back_url' => 'required|string',
         ];
     }
 }
