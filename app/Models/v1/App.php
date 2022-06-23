@@ -14,8 +14,5 @@ class App extends Model
         'description',
         'front_url',
         'back_url',
-        'client_id',
-        'client_secret',
-        'grant_type'
     ];
 }
