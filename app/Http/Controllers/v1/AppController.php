@@ -56,8 +56,12 @@ class AppController extends Controller
         $app->update([
             'name' => $request->name??$app->name,
             'description' => $request->description??$app->description,
-            'front_url' => $request->front_url??$app->front_url,
-            'back_url' => $request->back_url??$app->back_url,
+            'url' => $request->url??$app->url,
+            'IP' => $request->IP??$app->IP,
+            'port' => $request->port??$app->port,
+            'grant_type' => $request->grant_type??$app->grant_type,
+            'client_id' => $request->client_id??$app->client_id,
+            'client_secret' => $request->client_secret??$app->client_secret,
         ]);
 
         return $app;

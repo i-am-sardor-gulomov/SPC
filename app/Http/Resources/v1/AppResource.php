@@ -15,30 +15,41 @@ class AppResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = auth()->user();
         $credential = Credential::where([
-            'user_id'=>auth()->user()->id,
+            'user_id'=>$user->id,
             'app_id'=>$this->id
         ]);
 
-        if (is_null($credential)){
-            $front_status = $back_status = false;
-        }elseif($credential->count()>1){
-            abort(500, 'Bazada xatolik. Foydalanuvchida ortiqcha kridensiyalar mavjud.');
+        if ($credential->count()==0){
+            $status = false;
+        }elseif($credential->count()==1){
+            $status = !(is_null($credential->first('login')) or is_null($credential->first('password')));
         }else{
-            $front_status = !(is_null($credential->first('front_login')) or is_null($credential->first('front_password')));
-            $back_status = !(is_null($credential->first('back_login')) or is_null($credential->first('back_password')));
+            abort(500, 'Bazada xatolik. Foydalanuvchida ortiqcha kridensiyalar mavjud.');
         }
 
-        return [
+        $resource = [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'front_url' => $this->front_url,
-            'front_status' => $front_status,
-            'back_url' => $this->back_url,
-            'back_status' => $back_status,
+            'url' => $this->url,
+            'status' => $status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
+
+        if ($user->status=='admin'){
+            $admin_resource = [
+                'IP',
+                'port',
+                'grant_type',
+                'client_id',
+                'client_secret',
+            ];
+            $resource = array_merge($resource, $admin_resource);
+        }
+
+        return $resource;
     }
 }

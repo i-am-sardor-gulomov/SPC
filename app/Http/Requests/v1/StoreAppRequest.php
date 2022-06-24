@@ -26,8 +26,12 @@ class StoreAppRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'string',
-            'front_url' => 'required|string',
-            'back_url' => 'required|string',
+            'url' => 'required|string',
+            'IP' => 'required|ip',
+            'port' => 'required|numeric',
+            'grant_type' => 'required|string',
+            'client_id' => 'required|numeric',
+            'client_secret' => 'required|string',
         ];
     }
 }

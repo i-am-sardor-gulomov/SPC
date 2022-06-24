@@ -10,16 +10,13 @@ class Credential extends Model
     use HasFactory;
 
     protected $fillable = [
-        'front_login',
-        'front_password',
-        'back_login',
-        'back_password',
+        'login',
+        'password',
         'user_id',
         'app_id'
     ];
 
     protected $hidden = [
-        'front_password',
-        'back_password'
+        'password'
     ];
 }

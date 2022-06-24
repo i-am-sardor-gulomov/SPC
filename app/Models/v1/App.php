@@ -12,7 +12,19 @@ class App extends Model
     protected $fillable = [
         'name',
         'description',
-        'front_url',
-        'back_url',
+        'url',
+        'IP',
+        'port',
+        'grant_type',
+        'client_id',
+        'client_secret',
+    ];
+
+    protected $hidden = [
+        'IP',
+        'port',
+        'grant_type',
+        'client_id',
+        'client_secret',
     ];
 }

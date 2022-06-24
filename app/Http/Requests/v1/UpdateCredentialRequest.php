@@ -24,12 +24,9 @@ class UpdateCredentialRequest extends FormRequest
     public function rules()
     {
         return [
-            'front_login'=>'string',
-            'front_password'=>'string',
-            'front_password_old'=>'string|required_with:front_password',
-            'back_login'=>'string',
-            'back_password'=>'string',
-            'back_password_old'=>'string|required_with:back_password'
+            'login'=>'string|required',
+            'password'=>'string|required_with:front_login',
+            'password_old'=>'string|required_with:password',
         ];
     }
 }

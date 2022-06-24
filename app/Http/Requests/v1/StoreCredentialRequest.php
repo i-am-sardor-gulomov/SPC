@@ -24,10 +24,8 @@ class StoreCredentialRequest extends FormRequest
     public function rules()
     {
         return [
-            'front_login'=>'string',
-            'front_password'=>'string|required_with:front_login',
-            'back_login'=>'string',
-            'back_password'=>'string|required_with:back_login'
+            'login'=>'string|required',
+            'password'=>'string|required_with:front_login',
         ];
     }
 }

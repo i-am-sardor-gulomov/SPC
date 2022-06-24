@@ -1,0 +1,1130 @@
+{
+	"info": {
+		"_postman_id": "2a1a1756-ed1b-4564-bed3-06f1afcfb7e7",
+		"name": "SPC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21294080"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"grant_type\":\"password\",\r\n    \"client_id\":2,\r\n    \"client_secret\":\"Vcx3vUnGdg27Y3GeoZfgD1ONzAPgcDa5TrC6VKis\",\r\n    \"username\":\"foo\",\r\n    \"password\":\"777777\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/oauth/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 List Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dev\",\r\n    \"password\": \"123456\",\r\n    \"password_confirm\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"admin_password\": \"123456\",\r\n    \"username\": \"dev_updated\",\r\n    \"password\": \"123456_updated\",\r\n    \"password_confirm\": \"123456_updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Retrieve single user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/user/2?Accept=appl",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"2"
+							],
+							"query": [
+								{
+									"key": "Accept",
+									"value": "appl"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Destroy user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"admin_password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/logout",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 List apps",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Retrieve app",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/1",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Create app",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"APP name\",\r\n    \"discription\": \"This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"127.0.0.1:8080/api/v1/notes/owned\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Update app",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated name\",\r\n    \"discription\": \"[Updated] This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"updated.front.end/url/is/required\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/1",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Destroy app",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/1",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Create credential",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"login\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Retrieve credential",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Update credential",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"updated_login\",\r\n    \"password\": \"updated_password\",\r\n    \"password_old\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Developer",
+			"item": [
+				{
+					"name": "403 List Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dev\",\r\n    \"password\": \"123456\",\r\n    \"password_confirm\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Retrieve single user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/user/3",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"admin_password\": \"123456\",\r\n    \"username\": \"dev_updated\",\r\n    \"password\": \"123456_updated\",\r\n    \"password_confirm\": \"123456_updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Destroy user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"admin_password\": \"123456@\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/3",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/logout",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List apps",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve app",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Create app",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"APP name\",\r\n    \"discription\": \"This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"127.0.0.1:8080/api/v1/notes/owned\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Update app",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated name\",\r\n    \"discription\": \"[Updated] This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"updated.front.end/url/is/required\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Destroy app",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create credential",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"doni@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve credential",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update credential",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"updated_login\",\r\n    \"password\": \"updated_password\",\r\n    \"password_old\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNzFmNWI0ODM1NzQyNTc1NjU5M2ZmODZjMzA3OGEyNmRjZjVlNDEwNzAyNTBhOGVkYjI1NzhiN2VmNTQ3ZmJiMTEyNDljNTVmZGYxN2FmZmYiLCJpYXQiOjE2NTYwNjQwNDEuMDM3NTg2LCJuYmYiOjE2NTYwNjQwNDEuMDM3NTkzLCJleHAiOjE2NTYxNTA0NDEuMDIwMzY2LCJzdWIiOiI0Iiwic2NvcGVzIjpbImRldmVsb3BlciJdfQ.pl_-oSgYpmz-yxK7TLfpVi983ptwJgLNoYhpbrnjFbXXujBd01M63yLDxIoDMchoc3pZBy3Wz28NKBxI0pEP3Qqvm4th6i_yp4MpfVW3TCJUW85mTTxnuBqQSb7ZJWXF9rR_iwaOLo31FbX7vcIsQjgQ9a5qPzZ4KuUVI0LWBZIveJjXpJe2U1r3ogEhGxweUdki6vW4OPXWt-axYgYPm7BIfWfLie4h5yDjr-3eQskuHu-VTGnmo6Zlddo560m_1K8xD_ZsabOw8-MBq8ZyvJ_DrByA4HYqs68Qqogji065dJO0mluGYyva8O_XjdLUgjGKb4ECGNneaI_9dx_q5Q-FzwLkDdmGBs4XFtOQoLsJWlR6vk9lMdKLJSpUPvNOsPntQf44vyPeVFD9Y4mjnex4eAptydCwQIcMgHJTh7M7YMIspCAKFE838dtTlriJsynWFpZsZ8N4byVCNOZa85xeBkguO2tsDgOWm1XyIZZ7zE4QDaigdM5CRF3A-wnd9HbybIVMF3fBItW0vAuOZNBbOQiSkCZpZhBF78rzNXICSJrxGOfpRaw0go71f77ztnWDyA0c4uUzp7-u8gwdrBxujjZc5dROa_4MF3LFK_hs_secuhy7OToh_3e4XOVsmK-6SgYQ_nv9D7KS4EpiLVAq-vRU24IssY_WhwRXBK0",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"baa\",\r\n    \"password\": \"224466\",\r\n    \"password_confirm\": \"224466\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve single user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/user/5",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"admin_password\": \"123456\",\r\n    \"username\": \"dev_updated\",\r\n    \"password\": \"123456_updated\",\r\n    \"password_confirm\": \"123456_updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"admin_password\": 123456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/logout",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List apps",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create app",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"APP name\",\r\n    \"discription\": \"This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"127.0.0.1:8080/api/v1/notes/owned\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve app",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update app",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated name\",\r\n    \"discription\": \"[Updated] This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"updated.front.end/url/is/required\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy app",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/2",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create credential",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"login\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve credential",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update credential",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"updated_login\",\r\n    \"password\": \"updated_password\",\r\n    \"password_old\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/app/2/credential",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"2",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTZlNWVkMjRiNjdkNGNmNjg2MjhiOGY1NzY3ZDUzYjczOGE3N2MyZDE4YjNlODM5NzRiZDFhMDBkOGNkY2VkMjg0ZmU4OWQwOGFjYjY5YTgiLCJpYXQiOjE2NTU4OTk1MzguNTM0ODM0LCJuYmYiOjE2NTU4OTk1MzguNTM0ODM4LCJleHAiOjE2NTcxOTU1MzguNTI3NzcyLCJzdWIiOiIxIiwic2NvcGVzIjpbImFkbWluIl19.gXKVVG00AZDXy5fOtZBId35rVtWlQZC5lUMU54RGM8ttmfktFAsYpCxh4iUkWGWPoQWPVdCq272_aqYsOrpQjx2qlv5LD2RAbIkwDO5nyjKZxPW7y9s-rTKvlsXOlRaJhKp7i11TBfB6xj7VUDVcuLpPRDbAbjcayrneSXSA5skr5rsSdiI0i7k1lLR5QxczjdZgabQ7EGJNgK2D2DC8rfWGQ2awqoxK8ByE7KdPNBTxKlBEkefkCdudSis76VpS8Ge6iN98ZTHptZrqLzDG40Dfi5XwSw00EXA2m2dPL_uiFWaAGkBF4QMDzN398jUSQewojh7gkH6zoyxYYdewRwoQmY_kx3ErXv1COgvlxvwBlm0BhvJI18tNMrnlIetMW5__qmabIfNu7vjAXs1pqwvG6nIMaRPtIJ6l4b6lwkgkT1w_3Kq9D8kBflZKBjDkBHU9HKckYEz9gP-XcOOPh-mhNHgZ_lXOpns6KKrvbWO-2sCYMDb5qq1kEO34nkNV2DoyybYpSdBkrMQCTiiWWeoHLei3Hv_ighyjooNCOH1Ndvn6htk6euOYQnj3vLpa2W8i8CXgqMKwykMLICs5yoIr4SDZ7XSdxgXhmcsJj-ntrwfpE6RglSGa9fIqgMU_QdvS0EhJR9i3lm1ZaIbm2pD6oj9sReItWefi7EV1Kbw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({key: 'Accept', value: 'application/json' });"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_base_url",
+			"value": "127.0.0.1:8000/api"
+		},
+		{
+			"key": "base_url",
+			"value": "127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}
