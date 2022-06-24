@@ -41,11 +41,11 @@ class AppResource extends JsonResource
 
         if ($user->status=='admin'){
             $admin_resource = [
-                'IP',
-                'port',
-                'grant_type',
-                'client_id',
-                'client_secret',
+                'IP'=>$this->IP,
+                'port'=>$this->port,
+                'grant_type'=>$this->grant_type,
+                'client_id'=>$this->client_id,
+                'client_secret'=>$this->client_secret,
             ];
             $resource = array_merge($resource, $admin_resource);
         }
