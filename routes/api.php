@@ -6,7 +6,7 @@ use App\Http\Controllers\v1\UserController;
 use Illuminate\Support\Facades\Route;
 
 //Avtarizatsiya talab qilinmagan endpointlar
-
+Route::post('login', [UserController::class, 'login']);                         //200
 
 //Avtarizatsiya talab qilingan endpointlar
 Route::middleware('auth:api')->group(function(){

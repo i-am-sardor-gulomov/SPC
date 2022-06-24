@@ -103,6 +103,22 @@ class UserController extends Controller
         return response(['username'=>$username], 204);
     }
 
+    public function login(Request $request){
+        $login = $request->validate([
+            'username'=>'required|exists:users,username',
+            'password'=>'required|min:6'
+        ]);
+
+        if (!Auth::attempt($login)){
+            abort(227, "Login yoki parol xato");
+        }
+
+        $user = Auth::getprovider()->retrieveByCredentials($login);
+        $accessToken = $user->createToken('AccessToken', [$user->status])->accessToken;
+
+        return response()->json(['user'=>$user, 'token'=>$accessToken]); 
+    }
+
     public function logout(Request $request)
     {
         $tokenID = $request->user()->token()->id;
@@ -110,4 +126,6 @@ class UserController extends Controller
         $tokenRepository->revokeAccessToken($tokenID);
         return response('', 204);
     }
+
+    
 }
