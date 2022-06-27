@@ -10,13 +10,13 @@
 			"name": "Public",
 			"item": [
 				{
-					"name": "Login",
+					"name": "Login via OAuth",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"grant_type\":\"password\",\r\n    \"client_id\":2,\r\n    \"client_secret\":\"Vcx3vUnGdg27Y3GeoZfgD1ONzAPgcDa5TrC6VKis\",\r\n    \"username\":\"foo\",\r\n    \"password\":\"777777\"\r\n}",
+							"raw": "{\r\n    \"grant_type\":\"password\",\r\n    \"client_id\":2,\r\n    \"client_secret\":\"Vcx3vUnGdg27Y3GeoZfgD1ONzAPgcDa5TrC6VKis\",\r\n    \"username\":\"doni\",\r\n    \"password\":\"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -31,6 +31,32 @@
 							"path": [
 								"oauth",
 								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dev\",\r\n    \"password\": \"224466\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/login",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"login"
 							]
 						}
 					},
@@ -384,6 +410,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "401 Retrieve profile info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/user/profile",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 Update profile info",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullname\": \"Foo Bar\",\r\n    \"super_password\": \"123456_updated\",\r\n    \"username\": \"dev_updated\",\r\n    \"password\": \"0000000\",\r\n    \"password_confirm\": \"0000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/profile",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -708,6 +779,70 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Retrieve profile info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/user/profile",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update profile info",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dev\",\r\n    \"phone\": \"+998999338367\",\r\n    \"fullname\": \"Developerbek Dasturchiyevich\",\r\n    \"password\": \"224466\",\r\n    \"password_confirm\": \"224466\",\r\n    \"super_password\": \"112233\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/profile",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/app/6/token",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"app",
+								"6",
+								"token"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -715,7 +850,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNzFmNWI0ODM1NzQyNTc1NjU5M2ZmODZjMzA3OGEyNmRjZjVlNDEwNzAyNTBhOGVkYjI1NzhiN2VmNTQ3ZmJiMTEyNDljNTVmZGYxN2FmZmYiLCJpYXQiOjE2NTYwNjQwNDEuMDM3NTg2LCJuYmYiOjE2NTYwNjQwNDEuMDM3NTkzLCJleHAiOjE2NTYxNTA0NDEuMDIwMzY2LCJzdWIiOiI0Iiwic2NvcGVzIjpbImRldmVsb3BlciJdfQ.pl_-oSgYpmz-yxK7TLfpVi983ptwJgLNoYhpbrnjFbXXujBd01M63yLDxIoDMchoc3pZBy3Wz28NKBxI0pEP3Qqvm4th6i_yp4MpfVW3TCJUW85mTTxnuBqQSb7ZJWXF9rR_iwaOLo31FbX7vcIsQjgQ9a5qPzZ4KuUVI0LWBZIveJjXpJe2U1r3ogEhGxweUdki6vW4OPXWt-axYgYPm7BIfWfLie4h5yDjr-3eQskuHu-VTGnmo6Zlddo560m_1K8xD_ZsabOw8-MBq8ZyvJ_DrByA4HYqs68Qqogji065dJO0mluGYyva8O_XjdLUgjGKb4ECGNneaI_9dx_q5Q-FzwLkDdmGBs4XFtOQoLsJWlR6vk9lMdKLJSpUPvNOsPntQf44vyPeVFD9Y4mjnex4eAptydCwQIcMgHJTh7M7YMIspCAKFE838dtTlriJsynWFpZsZ8N4byVCNOZa85xeBkguO2tsDgOWm1XyIZZ7zE4QDaigdM5CRF3A-wnd9HbybIVMF3fBItW0vAuOZNBbOQiSkCZpZhBF78rzNXICSJrxGOfpRaw0go71f77ztnWDyA0c4uUzp7-u8gwdrBxujjZc5dROa_4MF3LFK_hs_secuhy7OToh_3e4XOVsmK-6SgYQ_nv9D7KS4EpiLVAq-vRU24IssY_WhwRXBK0",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiZjA3MmY0ZDNmZGMzNjc2OTkwNDBjMzA0MzZhMDQ2ZmQxNWU4YTQwODAwMWJhMmI2M2FjZDdkYjA1NWJkOTE1YWY1ZDk3NWZlNmNjYWNlNDEiLCJpYXQiOjE2NTYzMTI2NTAuMTA3NDg2LCJuYmYiOjE2NTYzMTI2NTAuMTA3NDkxLCJleHAiOjE2NTYzOTkwNTAuMDk4NzQyLCJzdWIiOiIzIiwic2NvcGVzIjpbImRldmVsb3BlciJdfQ.SkSrM6KxFVQGY_C2ffXBBFt3u-fI33gatvSc0wUHRcknM4rTStbjF_Ea4SsepDBSm_BrzunUK8PiS_rLcHxiyIbZDDjRvOzBgHWMSWufx1D5CUo19_ic8dMAK5ihkAzSCRz86BX2sGtAZE-PPp7R7rRAyEvaSBlMppvpmtY_iKhYSjGe8AplzotGtLqJfMrcokJ3w7_bdDBiLO7hRaIwWbsOB79maOhtnW7c4Illl4Ns2fcsvvuzd8XxVTLAUsrX_0s1wjRWBACJkoAn--3s6e4NalCT9gJE-llNd3y8fXtLja717fpvJVmqUeRWd2iq4yssGlHYI7qImwW_wthNOEccEZ9ArR1zDzLochhuE5YkXTHxa0_d6kER7kEDgK6x3JSleKb_l1wSrnFyaoG9S4K3tI5lFmVbfnBky5gYDk280C-zvHFwj_obLdHIruG5pI3wD6AqIaI8JtLWzHrpZu_KW9RPgQXLBnrKjLObIPZq14xwgVxoCJ8Uk0_wBqi_1z0wuNXZkh3J4CbBqWqZQKuHm4cUaakm2XmFQ7Zpc8BELGD79ggWpCeoGAnTsE97Z7fOl7BMwkDUIAySOu9whx8YoiDPhkceoaHnDT9oPvQK7sKEEKaQnSBREN9PH5wWxkEXfr7qRClqjqRSCvepNBuCTV3y9Toti8bhzEhJQjw",
 						"type": "string"
 					}
 				]
@@ -774,7 +909,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"baa\",\r\n    \"password\": \"224466\",\r\n    \"password_confirm\": \"224466\"\r\n}",
+							"raw": "{\r\n    \"fullname\": \"Jasur Ruiddinovich\",\r\n    \"username\": \"jaska\",\r\n    \"password\": \"ipapatamus\",\r\n    \"password_confirm\": \"ipapatamus\",\r\n    \"status\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -799,13 +934,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_base_url}}/user/5",
+							"raw": "{{api_base_url}}/user/1",
 							"host": [
 								"{{api_base_url}}"
 							],
 							"path": [
 								"user",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -818,7 +953,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"admin_password\": \"123456\",\r\n    \"username\": \"dev_updated\",\r\n    \"password\": \"123456_updated\",\r\n    \"password_confirm\": \"123456_updated\"\r\n}",
+							"raw": "{\r\n    \"super_password\": \"123456\",\r\n    \"fullname\": \"Developerbek Dasturchiyevich\",\r\n    \"username\": \"dev\",\r\n    \"password\": \"224466\",\r\n    \"password_confirm\": \"224466\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -826,13 +961,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{api_base_url}}/user/2",
+							"raw": "{{api_base_url}}/user/3",
 							"host": [
 								"{{api_base_url}}"
 							],
 							"path": [
 								"user",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -853,13 +988,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{api_base_url}}/user/2",
+							"raw": "{{api_base_url}}/user/4",
 							"host": [
 								"{{api_base_url}}"
 							],
 							"path": [
 								"user",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -906,7 +1041,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"APP name\",\r\n    \"discription\": \"This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"127.0.0.1:8080/api/v1/notes/owned\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"raw": "{\r\n    \"name\": \"APP name new\",\r\n    \"discription\": \"This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"127.0.0.1:8080/api/v1/notes/owned\",\r\n    \"icon\": \"path/to/file\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -950,7 +1085,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Updated name\",\r\n    \"discription\": \"[Updated] This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"updated.front.end/url/is/required\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Updated name\",\r\n    \"discription\": \"[Updated] This is a text about the application. But it is OPTIONAL.\",\r\n    \"url\": \"updated.front.end/url/is/required\",\r\n    \"IP\": \"127.0.0.1\",\r\n    \"port\": \"8080\",\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"D5BXDyAsKOqXR2MP0fLZ1fWNqSeKhnslFcS2LUvC\",\r\n    \"icon\": \"new/path\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -958,13 +1093,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{api_base_url}}/app/2",
+							"raw": "{{api_base_url}}/app/4",
 							"host": [
 								"{{api_base_url}}"
 							],
 							"path": [
 								"app",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -976,13 +1111,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{api_base_url}}/app/2",
+							"raw": "{{api_base_url}}/app/4",
 							"host": [
 								"{{api_base_url}}"
 							],
 							"path": [
 								"app",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -995,7 +1130,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"login\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"login\": \"loginnew\",\r\n    \"password\": \"passwordnew\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1022,13 +1157,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_base_url}}/app/2/credential",
+							"raw": "{{api_base_url}}/app/5/credential",
 							"host": [
 								"{{api_base_url}}"
 							],
 							"path": [
 								"app",
-								"2",
+								"5",
 								"credential"
 							]
 						}
@@ -1042,7 +1177,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"updated_login\",\r\n    \"password\": \"updated_password\",\r\n    \"password_old\": \"password\"\r\n}",
+							"raw": "{\r\n    \"login\": \"doni@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"super_password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1050,14 +1185,59 @@
 							}
 						},
 						"url": {
-							"raw": "{{api_base_url}}/app/2/credential",
+							"raw": "{{api_base_url}}/app/5/credential",
 							"host": [
 								"{{api_base_url}}"
 							],
 							"path": [
 								"app",
-								"2",
+								"5",
 								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve profile info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base_url}}/user/profile",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update profile info",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullname\": \"Rajabov Doniyorbek\",\r\n    \"super_password\": \"123456\",\r\n    \"username\": \"doni\",\r\n    \"phone\": \"+998916888727\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/profile",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
 							]
 						}
 					},
@@ -1069,7 +1249,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTZlNWVkMjRiNjdkNGNmNjg2MjhiOGY1NzY3ZDUzYjczOGE3N2MyZDE4YjNlODM5NzRiZDFhMDBkOGNkY2VkMjg0ZmU4OWQwOGFjYjY5YTgiLCJpYXQiOjE2NTU4OTk1MzguNTM0ODM0LCJuYmYiOjE2NTU4OTk1MzguNTM0ODM4LCJleHAiOjE2NTcxOTU1MzguNTI3NzcyLCJzdWIiOiIxIiwic2NvcGVzIjpbImFkbWluIl19.gXKVVG00AZDXy5fOtZBId35rVtWlQZC5lUMU54RGM8ttmfktFAsYpCxh4iUkWGWPoQWPVdCq272_aqYsOrpQjx2qlv5LD2RAbIkwDO5nyjKZxPW7y9s-rTKvlsXOlRaJhKp7i11TBfB6xj7VUDVcuLpPRDbAbjcayrneSXSA5skr5rsSdiI0i7k1lLR5QxczjdZgabQ7EGJNgK2D2DC8rfWGQ2awqoxK8ByE7KdPNBTxKlBEkefkCdudSis76VpS8Ge6iN98ZTHptZrqLzDG40Dfi5XwSw00EXA2m2dPL_uiFWaAGkBF4QMDzN398jUSQewojh7gkH6zoyxYYdewRwoQmY_kx3ErXv1COgvlxvwBlm0BhvJI18tNMrnlIetMW5__qmabIfNu7vjAXs1pqwvG6nIMaRPtIJ6l4b6lwkgkT1w_3Kq9D8kBflZKBjDkBHU9HKckYEz9gP-XcOOPh-mhNHgZ_lXOpns6KKrvbWO-2sCYMDb5qq1kEO34nkNV2DoyybYpSdBkrMQCTiiWWeoHLei3Hv_ighyjooNCOH1Ndvn6htk6euOYQnj3vLpa2W8i8CXgqMKwykMLICs5yoIr4SDZ7XSdxgXhmcsJj-ntrwfpE6RglSGa9fIqgMU_QdvS0EhJR9i3lm1ZaIbm2pD6oj9sReItWefi7EV1Kbw",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMTMxNTRlZmRhYTcwMWJmNThmMjdlYzkxMzAwM2IxNTk5ZTg3ZmIxZWViYTBjYmFjOWRhNWI1MTk2NTMzNWFlZDEwOWRhMTUyYjYzYWE3MWEiLCJpYXQiOjE2NTYzMTE2NzguNTcyOTMsIm5iZiI6MTY1NjMxMTY3OC41NzI5NTQsImV4cCI6MTY1NjM5ODA3OC41NjU4NDQsInN1YiI6IjEiLCJzY29wZXMiOlsiYWRtaW4iXX0.SlRAkk_XWmVj1hYAvl3e_V4qPyQOKmxwDZ2NmJ_Rj1qTxS9lyTaGqO4pg6AhNgm5_bA90bxm7YinZ0t_vqXLwA8cRYOTsTen6uPd0hoAD4lX1wBUit5-uh8K_zfaRIVsDZRWglyDvkRSujS9WKMx0Jv0R95VAUxXdkTnVzNjD-NEa_d1_uPTHkvJOgIol8GLPSCHwhdRPt23_hA9jiQUCLAaTTgelyJZ-UAv9b7qxKOvp1FuKANKzEKIsKKDVKxCHW5BMS9Kg-aQ4VFbt0CW-_Xk8_x5j_DZ3PRCqFLUjWVScJ6DvP3eTBko9IU_sBEMqpGBvYFCZQDr5Sx7x8Mpwqg-ixVo-3jqgsYuPdZgwwzc01zqefpTiDbw4j4ibdUl_5E8YZ9ijwkz6hL-pfPaDeAJdoEs0TouPwAO6h0vDKSbD6oaXo0d61iY_U0K5QKqvgn8yH0W7Xhk2ZXMMpM1rv_8s4b6XQ3PxcvoQMH8-93Cj2eqsQpuei8bP0k2i2yLfoCU4eD1p7bK5ihu9v_wElUl2iz85NEv2ORI6KJdL0HIm-ErSMMOOrva8WV1hdFWEXMjdNePcNifJzo9YOlFeVI6ErWcLG-sVkiLhME2dP24oQh_sYUrg12IXro19bgnBu5LsSgYsj1rdGMD2MUXuFpTuSwShKBl-okUMbGFVTw",
 						"type": "string"
 					}
 				]
