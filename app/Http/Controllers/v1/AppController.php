@@ -7,6 +7,12 @@ use App\Models\v1\App;
 use App\Http\Requests\v1\StoreAppRequest;
 use App\Http\Requests\v1\UpdateAppRequest;
 use App\Http\Resources\v1\AppResource;
+use App\Models\v1\Credential;
+use Exception;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Http;
 
 class AppController extends Controller
 {
@@ -80,5 +86,37 @@ class AppController extends Controller
         $app->delete();
 
         return response(['name'=>$name], 204);
+    }
+
+    public function getToken(Request $request, App $app){
+        $user = auth()->user();
+        $credential = Credential::where(['user_id'=>$user->id, 'app_id'=>$app->id])->first();
+
+        if (is_null($credential)){
+            abort(422, "Ushbu dastur uchun ma'lumotlar biriktirmagansiz.");
+        }
+
+        try{
+        $response = Http::post('http://'.$app->IP.':'.$app->port.'/oauth/token', [
+            'grant_type'=> $app->grant_type,
+            'client_id'=> $app->client_id,
+            'client_secret'=> $app->client_secret,
+            'username' => '$credential->login',
+            'password' => Crypt::decryptString($credential->password)
+        ]);
+        }catch (ConnectionException $e) {
+            return response("Dastur uchun IP yoki port xato ko'rsatilgan.", 422);
+        }catch (Exception $e) {
+            return response("Serverda xatolik.", 500);
+        }
+
+        if ($response->clientError()){
+            return response("Xatolik yuz berdi. Dasturga biriktirgan ma'lumotlar xato bo'lishi mumkin.", 400);
+        }
+
+        if ($response->serverError()){
+            return response('Tanlangan dastur serverida xatolik yuz berdi. Dastur xozirda mavjudligini tekshiring.', 500);
+        }
+
     }
 }
