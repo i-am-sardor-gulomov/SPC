@@ -26,7 +26,7 @@ class UpdateCredentialRequest extends FormRequest
         return [
             'login'=>'string|required',
             'password'=>'string|required_with:front_login',
-            'password_old'=>'string|required_with:password',
+            'super_password'=>'string|required',
         ];
     }
 }

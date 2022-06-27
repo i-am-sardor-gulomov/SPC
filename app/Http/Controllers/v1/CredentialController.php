@@ -8,6 +8,7 @@ use App\Http\Requests\v1\StoreCredentialRequest;
 use App\Http\Requests\v1\UpdateCredentialRequest;
 use App\Models\v1\App;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class CredentialController extends Controller
 {
@@ -23,9 +24,7 @@ class CredentialController extends Controller
         $user_id = auth()->user()->id;
         if (Credential::where(['user_id'=>$user_id, 'app_id'=>$app->id])->exists()){
             abort(500, "Bu loyiha uchun ma'lumot kiritgansiz.");
-        }
-
-        
+        }     
 
         $credential = Credential::create([
             'app_id'=>$app->id,
@@ -62,8 +61,9 @@ class CredentialController extends Controller
      */
     public function update(UpdateCredentialRequest $request, App $app)
     {
+        $user = auth()->user();
         $credential = Credential::where([
-            'user_id'=>auth()->user()->id,
+            'user_id'=>$user->id,
             'app_id'=>$app->id
         ])->first();
 
@@ -71,8 +71,8 @@ class CredentialController extends Controller
             abort(404, "Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz.");
         }    
 
-        if ($request->password_old!=Crypt::decryptString($credential->password)){
-            abort(400, 'Joriy parol tasdiqlanmadi.');
+        if (!Hash::check($request->super_password, $user->password)){
+            abort(400, 'Parol tasdiqlanmadi.');
         }
 
         $credential->update([
