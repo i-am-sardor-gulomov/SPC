@@ -75,10 +75,10 @@ class UserController extends Controller
     {
         $admin = auth()->user();
 
-        $admin_check_password = $request->validate(['super_password'=>'required|min:6'])['super_password'];
+        $admin_check_password = $request->super_password;
 
-        if (!Hash::check($admin_check_password, $admin->password)){
-            abort(403, "Admin paroli xato!");
+        if ($admin_check_password and !Hash::check($admin_check_password, $admin->password)){
+            abort(422, "Admin paroli xato!");
         }
 
         $user->update([
@@ -97,7 +97,7 @@ class UserController extends Controller
         $user_check_password = $request->super_password;
 
         if ($user_check_password and !Hash::check($user_check_password, $user->password)){
-            abort(403, "Joriy parol tasdiqlanmadi!");
+            abort(422, "Joriy parol tasdiqlanmadi!");
         }
 
         $user->update([
@@ -124,7 +124,7 @@ class UserController extends Controller
         $admin_check_password = $request->validate(['admin_password'=>'required|min:6'])['admin_password'];
 
         if (!Hash::check($admin_check_password, $admin->password)){
-            abort(403, "Admin paroli xato!");
+            abort(422, "Admin paroli xato!");
         }
 
         $username = $user->username;

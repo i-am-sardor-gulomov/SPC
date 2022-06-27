@@ -29,7 +29,7 @@ class UpdateUserRequest extends FormRequest
             'fullname' => 'required|string',
             'phone' => 'string',
             'super_password' => Rule::requiredIf(User::where(['username'=>$this->username])->count()==0 or $this->password),
-            'username' => 'required',
+            'username' => 'required|unique:users,username,'.$this->user->id,
             'password' => 'min:6',
             'password_confirm' => 'same:password|required_with:password'
         ];
