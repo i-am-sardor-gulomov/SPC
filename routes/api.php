@@ -35,7 +35,7 @@ Route::middleware(['auth:api', 'scope:admin'])->group(function(){
     //User ustida amallar
     Route::get('user', [UserController::class, 'index']);                       //200
     Route::post('user', [UserController::class, 'store']);                      //201
-    Route::get('user/{user}', [UserController::class, 'show']);                 //200
+    Route::get('user/{user}', [UserController::class, 'show'])->where("app", '[0-9]+');                 //200
     Route::put('user/{user}', [UserController::class, 'update']);               //200
     Route::post('user/{user}', [UserController::class, 'destroy']);             //204
 

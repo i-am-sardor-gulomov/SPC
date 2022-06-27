@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\TokenRepository;
+use Illuminate\Validation\Rule;
+
 
 class UserController extends Controller
 {
@@ -36,6 +38,8 @@ class UserController extends Controller
     {
         $password_hashed = Hash::make($request['password']);
         $user = User::create([
+            'fullname'=>$request->fullname,
+            'phone'=>$request->phone,
             'username'=>$request->username,
             'password'=>$password_hashed,
             'status'=>$request->status??'developer'
@@ -71,15 +75,17 @@ class UserController extends Controller
     {
         $admin = auth()->user();
 
-        $admin_test_password = $request->validate(['super_password'=>'required|min:6'])['super_password'];
+        $admin_check_password = $request->validate(['super_password'=>'required|min:6'])['super_password'];
 
-        if (!Hash::check($admin_test_password, $admin->password)){
-            abort(227, "Admin paroli xato!");
+        if (!Hash::check($admin_check_password, $admin->password)){
+            abort(403, "Admin paroli xato!");
         }
 
         $user->update([
-            'username' => $request->username??$user->status,
-            'password' => $request->password??$user->status,
+            'fullname'=>$request->fullname??$user->fullname,
+            'phone'=>$request->phone??$user->phone,
+            'username' => $request->username??$user->username,
+            'password' => ($request->password)?Hash::make($request->password):$user->password,
             'status' => $request->status??$user->status
         ]);
 
@@ -88,7 +94,21 @@ class UserController extends Controller
 
     public function profileUpdate(UpdateUserRequest $request){
         $user = auth()->user();
-        //add some logic
+        $user_check_password = $request->super_password;
+
+        if ($user_check_password and !Hash::check($user_check_password, $user->password)){
+            abort(403, "Joriy parol tasdiqlanmadi!");
+        }
+
+        $user->update([
+            'fullname'=>$request->fullname??$user->fullname,
+            'phone'=>$request->phone??$user->phone,
+            'username' => $request->username??$user->username,
+            'password' => ($request->password)?Hash::make($request->password):$user->password,
+            'status' => $request->status??$user->status
+        ]);
+
+        return $user;
     }
 
     /**
@@ -101,10 +121,10 @@ class UserController extends Controller
     {
         $admin = auth()->user();
 
-        $admin_test_password = $request->validate(['admin_password'=>'required|min:6'])['admin_password'];
+        $admin_check_password = $request->validate(['admin_password'=>'required|min:6'])['admin_password'];
 
-        if (!Hash::check($admin_test_password, $admin->password)){
-            abort(227, "Admin paroli xato!");
+        if (!Hash::check($admin_check_password, $admin->password)){
+            abort(403, "Admin paroli xato!");
         }
 
         $username = $user->username;
@@ -120,7 +140,7 @@ class UserController extends Controller
         ]);
 
         if (!Auth::attempt($login)){
-            abort(227, "Login yoki parol xato");
+            abort(227, "Username yoki parol xato");
         }
 
         $user = Auth::getprovider()->retrieveByCredentials($login);
