@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\TokenRepository;
-use Illuminate\Validation\Rule;
 
 
 class UserController extends Controller
@@ -25,7 +24,7 @@ class UserController extends Controller
         if ($request->user()->tokenCan('admin')){
         return User::all();
         }
-        abort(403, "Bu so'rov faqat adminlar uchun");
+        return response("Bu so'rov faqat adminlar uchun", 403);
     }
 
     /**
@@ -78,7 +77,7 @@ class UserController extends Controller
         $admin_check_password = $request->super_password;
 
         if ($admin_check_password and !Hash::check($admin_check_password, $admin->password)){
-            abort(422, "Admin paroli xato!");
+            return response("Admin paroli xato!", 422);
         }
 
         $user->update([
@@ -97,7 +96,7 @@ class UserController extends Controller
         $user_check_password = $request->super_password;
 
         if ($user_check_password and !Hash::check($user_check_password, $user->password)){
-            abort(422, "Joriy parol tasdiqlanmadi!");
+            return response("Joriy parol tasdiqlanmadi!", 422);
         }
 
         $user->update([
@@ -124,7 +123,7 @@ class UserController extends Controller
         $admin_check_password = $request->validate(['admin_password'=>'required|min:6'])['admin_password'];
 
         if (!Hash::check($admin_check_password, $admin->password)){
-            abort(422, "Admin paroli xato!");
+            return response("Admin paroli xato!", 422);
         }
 
         $username = $user->username;
@@ -140,7 +139,7 @@ class UserController extends Controller
         ]);
 
         if (!Auth::attempt($login)){
-            abort(227, "Username yoki parol xato");
+            return response("Username yoki parol xato", 227);
         }
 
         $user = Auth::getprovider()->retrieveByCredentials($login);

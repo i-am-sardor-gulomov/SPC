@@ -93,7 +93,7 @@ class AppController extends Controller
         $credential = Credential::where(['user_id'=>$user->id, 'app_id'=>$app->id])->first();
 
         if (is_null($credential)){
-            abort(422, "Ushbu dastur uchun ma'lumotlar biriktirmagansiz.");
+            return response("Ushbu dastur uchun ma'lumotlar biriktirmagansiz.", 422);
         }
 
         try{

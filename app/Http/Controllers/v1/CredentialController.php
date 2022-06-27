@@ -23,7 +23,7 @@ class CredentialController extends Controller
 
         $user_id = auth()->user()->id;
         if (Credential::where(['user_id'=>$user_id, 'app_id'=>$app->id])->exists()){
-            abort(500, "Bu loyiha uchun ma'lumot kiritgansiz.");
+            return response("Bu loyiha uchun allaqachon ma'lumotlaringizni biriktirgansiz.", 422);
         }     
 
         $credential = Credential::create([
@@ -47,7 +47,7 @@ class CredentialController extends Controller
             'user_id'=>auth()->user()->id,
             'app_id'=>$app->id
         ])->first();
-        if (is_null($credential)){abort(404, "Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz.");}
+        if (is_null($credential)){return response("Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz.", 404);}
 
         return $credential;
     }
@@ -68,11 +68,11 @@ class CredentialController extends Controller
         ])->first();
 
         if (is_null($credential)){
-            abort(404, "Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz.");
+            return response("Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz.", 404);
         }    
 
         if (!Hash::check($request->super_password, $user->password)){
-            abort(400, 'Parol tasdiqlanmadi.');
+            return response('Parol tasdiqlanmadi.', 400);
         }
 
         $credential->update([
