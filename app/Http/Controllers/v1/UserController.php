@@ -55,6 +55,11 @@ class UserController extends Controller
         return $user;
     }
 
+    public function profileShow(){
+        $user = auth()->user();
+        return $user;
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -66,7 +71,7 @@ class UserController extends Controller
     {
         $admin = auth()->user();
 
-        $admin_test_password = $request->validate(['admin_password'=>'required|min:6'])['admin_password'];
+        $admin_test_password = $request->validate(['super_password'=>'required|min:6'])['super_password'];
 
         if (!Hash::check($admin_test_password, $admin->password)){
             abort(227, "Admin paroli xato!");
@@ -79,6 +84,11 @@ class UserController extends Controller
         ]);
 
         return $user;
+    }
+
+    public function profileUpdate(UpdateUserRequest $request){
+        $user = auth()->user();
+        //add some logic
     }
 
     /**

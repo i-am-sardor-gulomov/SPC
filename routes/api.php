@@ -19,6 +19,10 @@ Route::middleware('auth:api')->group(function(){
     Route::get('app/{app}/credential', [CredentialController::class, 'show']);  //200
     Route::put('app/{app}/credential', [CredentialController::class, 'update']);//200
 
+    //User ustida amallar
+    Route::get('user/profile', [UserController::class, 'profileShow']);         //200
+    Route::put('user/profile', [UserController::class, 'profileUpdate']);       //200
+
     //App ustida amallar
     Route::get('app', [AppController::class, 'index']);                         //200
     Route::get('app/{app}', [AppController::class, 'show']);                    //200

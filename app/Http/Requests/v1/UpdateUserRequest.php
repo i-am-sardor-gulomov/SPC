@@ -13,7 +13,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check() and $this->user()->tokenCan('admin');
+        return auth()->check();
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'admin_password' => 'required|min:6',
+            'super_password' => 'required|min:6',
             'username' => 'required|unique:users,username',
             'password' => 'required|min:6',
             'password_confirm' => 'required|same:password'
