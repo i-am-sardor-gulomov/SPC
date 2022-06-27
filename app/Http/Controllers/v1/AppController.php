@@ -57,6 +57,7 @@ class AppController extends Controller
             'name' => $request->name??$app->name,
             'description' => $request->description??$app->description,
             'url' => $request->url??$app->url,
+            'icon' => $request->icon??$app->icon,
             'IP' => $request->IP??$app->IP,
             'port' => $request->port??$app->port,
             'grant_type' => $request->grant_type??$app->grant_type,

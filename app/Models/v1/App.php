@@ -18,6 +18,7 @@ class App extends Model
         'grant_type',
         'client_id',
         'client_secret',
+        'icon'
     ];
 
     protected $hidden = [

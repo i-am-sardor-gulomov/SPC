@@ -34,6 +34,7 @@ class AppResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'url' => $this->url,
+            'icon' => $this->icon,
             'status' => $status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

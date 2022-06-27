@@ -29,6 +29,7 @@ class UpdateAppRequest extends FormRequest
             'url' => 'required|string',
             'IP' => 'required|ip',
             'port' => 'required|numeric',
+            'icon' => 'string',
             'grant_type' => 'required|string',
             'client_id' => 'required|numeric',
             'client_secret' => 'required|string',
