@@ -25,11 +25,12 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $user_id = $this->user->id??auth()->user()->id;
         return [
             'fullname' => 'required|string',
             'phone' => 'string',
             'super_password' => Rule::requiredIf(User::where(['username'=>$this->username])->count()==0 or $this->password),
-            'username' => 'required|unique:users,username,'.$this->user->id,
+            'username' => 'required|unique:users,username,'.$user_id,
             'password' => 'min:6',
             'password_confirm' => 'same:password|required_with:password'
         ];
