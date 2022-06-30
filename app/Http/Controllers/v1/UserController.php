@@ -19,12 +19,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->user()->tokenCan('admin')){
-        return User::all();
-        }
-        return response("Bu so'rov faqat adminlar uchun", 403);
+        $user_id = auth()->user()->id;
+        return User::where('id', '!=', $user_id)->get();
     }
 
     /**
@@ -104,7 +102,6 @@ class UserController extends Controller
             'phone'=>$request->phone??$user->phone,
             'username' => $request->username??$user->username,
             'password' => ($request->password)?Hash::make($request->password):$user->password,
-            'status' => $request->status??$user->status
         ]);
 
         return $user;
