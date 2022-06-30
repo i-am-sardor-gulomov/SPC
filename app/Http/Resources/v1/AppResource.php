@@ -37,7 +37,8 @@ class AppResource extends JsonResource
             'icon' => $this->icon,
             'status' => $status,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
+            'is_active' => $this->is_active,
         ];
 
         if ($user->status=='admin'){

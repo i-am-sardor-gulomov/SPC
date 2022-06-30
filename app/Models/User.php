@@ -22,6 +22,7 @@ class User extends Authenticatable
         'status',
         'phone',
         'fullname',
+        'is_active',
     ];
 
     /**
@@ -32,6 +33,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+      ];
 
     public function findForPassport($username)
     {

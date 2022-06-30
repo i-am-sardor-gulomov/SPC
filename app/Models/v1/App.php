@@ -18,7 +18,8 @@ class App extends Model
         'grant_type',
         'client_id',
         'client_secret',
-        'icon'
+        'icon',
+        'is_active'
     ];
 
     protected $hidden = [
@@ -28,4 +29,8 @@ class App extends Model
         'client_id',
         'client_secret',
     ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+      ];
 }

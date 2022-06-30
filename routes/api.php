@@ -40,10 +40,12 @@ Route::middleware(['auth:api', 'scope:admin'])->group(function(){
         ->where("app", '[0-9]+');                                               //200
     Route::put('user/{user}', [UserController::class, 'update']);               //200
     Route::post('user/{user}', [UserController::class, 'destroy']);             //204
+    Route::patch('user/{user}', [UserController::class, 'activenessUpdate']);   //200
 
     //App ustida amallar
     Route::post('app', [AppController::class, 'store']);                        //201
     Route::put('app/{app}', [AppController::class, 'update']);                  //200
     Route::delete('app/{app}', [AppController::class, 'destroy']);              //204
+    Route::patch('app/{app}', [AppController::class, 'activenessUpdate']);      //200
 });
 

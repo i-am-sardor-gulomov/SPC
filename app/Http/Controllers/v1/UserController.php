@@ -110,6 +110,11 @@ class UserController extends Controller
         return $user;
     }
 
+    public function activenessUpdate(Request $request, User $user){
+        $user->update(['is_active' => $request->is_active??$user->is_active]);
+        return response('', 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -143,6 +148,9 @@ class UserController extends Controller
         }
 
         $user = Auth::getprovider()->retrieveByCredentials($login);
+        if (!$user->is_active){
+            return response("Ushbu foydalanuvchi admin tomonidan faolsizlantirilgan.", 227);
+        }
         $accessToken = $user->createToken('AccessToken', [$user->status])->accessToken;
 
         return response()->json(['user'=>$user, 'token'=>$accessToken]); 

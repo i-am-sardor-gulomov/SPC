@@ -21,9 +21,12 @@ class AppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return AppResource::collection(App::all());
+    public function index(Request $request)
+    {   $queryset = ($request->page=='dashboard' and $request->user()->tokenCan('admin'))?
+            App::all():
+            App::where(['is_active'=>true])->get();
+
+        return AppResource::collection($queryset);
     }
 
     /**
@@ -45,8 +48,11 @@ class AppController extends Controller
      * @param  \App\Models\v1\App  $app
      * @return \Illuminate\Http\Response
      */
-    public function show(App $app)
+    public function show(Request $request, App $app)
     {
+        if (!$request->user()->tokenCan('admin') and !$app->is_active){
+            return response('Ushbu dastur admin tomonidan faolsizlantirilgan.');
+        }
         return new AppResource($app);
     }
 
@@ -72,6 +78,11 @@ class AppController extends Controller
         ]);
 
         return $app;
+    }
+
+    public function activenessUpdate(Request $request, App $app){
+        $app->update(['is_active' => $request->is_active??$app->is_active]);
+        return response('', 200);
     }
 
     /**
