@@ -108,6 +108,14 @@ class UserController extends Controller
     }
 
     public function activenessUpdate(Request $request, User $user){
+        if (!$request->is_active and $user->is_active){
+            $userTokens = $user->tokens;
+            foreach ($userTokens as $token){
+                $token->revoke();
+            
+            }
+        }
+        
         $user->update(['is_active' => $request->is_active??$user->is_active]);
         return response('', 200);
     }
@@ -141,7 +149,7 @@ class UserController extends Controller
         ]);
 
         if (!Auth::attempt($login)){
-            return response("Username yoki parol xato", 227);
+            return response()->json(["message"=>"Username yoki parol xato"], 400);
         }
 
         $user = Auth::getprovider()->retrieveByCredentials($login);
@@ -150,7 +158,7 @@ class UserController extends Controller
         }
         $accessToken = $user->createToken('AccessToken', [$user->status])->accessToken;
 
-        return response()->json(['user'=>$user, 'token'=>$accessToken]); 
+        return response()->json(['token'=>$accessToken]); 
     }
 
     public function logout(Request $request)

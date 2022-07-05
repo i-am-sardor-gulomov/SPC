@@ -22,7 +22,7 @@ class AppController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   $queryset = ($request->page=='dashboard' and $request->user()->tokenCan('admin'))?
+    {   $queryset = ($request->page=='admin' and $request->user()->tokenCan('admin'))?
             App::all():
             App::where(['is_active'=>true])->get();
 

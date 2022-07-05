@@ -6,15 +6,15 @@ use App\Http\Controllers\v1\UserController;
 use Illuminate\Support\Facades\Route;
 
 //Avtarizatsiya talab qilinmagan endpointlar
-Route::post('login', [UserController::class, 'login']);                         //200
+Route::post('login', [UserController::class, 'login']);                          //200
 
 //Avtarizatsiya talab qilingan endpointlar
 Route::middleware('auth:api')->group(function(){
 
     //Umumiy
-    Route::get('logout', [UserController::class, 'logout']);                    //204
-    Route::get('profile', [UserController::class, 'profileShow']);              //200
-    Route::put('profile', [UserController::class, 'profileUpdate']);            //200
+    Route::get('logout', [UserController::class, 'logout']);                     //204
+    Route::get('profile', [UserController::class, 'profileShow']);               //200
+    Route::put('profile', [UserController::class, 'profileUpdate']);             //200
 
     //Credential ustida amallar
     Route::post('apps/{app}/credential', [CredentialController::class, 'store']);//201
