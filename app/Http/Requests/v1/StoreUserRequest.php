@@ -28,7 +28,6 @@ class StoreUserRequest extends FormRequest
             'phone' => 'string',
             'username' => 'required|unique:users,username',
             'password' => 'required|min:6',
-            'password_confirm' => 'required|same:password'
         ];
     }
 }

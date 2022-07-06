@@ -11,6 +11,7 @@ class StoreAppRequest extends FormRequest
      *
      * @return bool
      */
+    
     public function authorize()
     {
         return (auth()->check() and $this->user()->tokenCan('admin'));
@@ -28,8 +29,8 @@ class StoreAppRequest extends FormRequest
             'description' => 'string',
             'url' => 'required|string',
             'IP' => 'required|ip',
-            'port' => 'required|numeric',
-            'icon' => 'string',
+            'port' => 'required|string',
+            'icon' => 'string|required',
             'grant_type' => 'required|string',
             'client_id' => 'required|numeric',
             'client_secret' => 'required|string',

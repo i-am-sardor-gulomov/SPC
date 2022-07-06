@@ -39,7 +39,7 @@ class AppController extends Controller
     {
         $app = App::create($request->all());
 
-        return response($app, 201);
+        return response(['data'=>(new AppResource($app)), 'message'=>'Muvaffaqqiyatli yaratildi.'], 201);
     }
 
     /**
@@ -112,7 +112,7 @@ class AppController extends Controller
             'grant_type'=> $app->grant_type,
             'client_id'=> $app->client_id,
             'client_secret'=> $app->client_secret,
-            'username' => '$credential->login',
+            'username' => $credential->login,
             'password' => Crypt::decryptString($credential->password)
         ]);
         }catch (ConnectionException $e) {
@@ -128,6 +128,8 @@ class AppController extends Controller
         if ($response->serverError()){
             return response('Tanlangan dastur serverida xatolik yuz berdi. Dastur xozirda mavjudligini tekshiring.', 500);
         }
+
+        return response(['token'=>$response['access_token']], 200) ;
 
     }
 }

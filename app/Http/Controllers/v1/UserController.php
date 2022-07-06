@@ -42,7 +42,7 @@ class UserController extends Controller
             'status'=>$request->status??'developer'
         ]);
 
-        return response($user, 201);
+        return response(['data'=>$user, 'message'=>'Muvaffaqqiyatli yaratildi.'], 201);
     }
 
     /**
