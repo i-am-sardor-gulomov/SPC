@@ -26,7 +26,7 @@ class AppResource extends JsonResource
         }elseif($credential->count()==1){
             $status = !(is_null($credential->first('login')) or is_null($credential->first('password')));
         }else{
-            abort(500, 'Bazada xatolik. Foydalanuvchida ortiqcha kridensiyalar mavjud.');
+            response(['message'=>'Bazada xatolik. Foydalanuvchida ortiqcha kridensiyalar mavjud.'], 500);
         }
 
         $resource = [

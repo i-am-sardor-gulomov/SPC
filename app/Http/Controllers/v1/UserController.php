@@ -75,7 +75,7 @@ class UserController extends Controller
         $admin_check_password = $request->super_password;
 
         if ($admin_check_password and !Hash::check($admin_check_password, $admin->password)){
-            return response("Admin paroli xato!", 422);
+            return response(["message"=>"Admin paroli xato!"], 422);
         }
 
         $user->update([
@@ -94,7 +94,7 @@ class UserController extends Controller
         $user_check_password = $request->super_password;
 
         if ($user_check_password and !Hash::check($user_check_password, $user->password)){
-            return response("Joriy parol tasdiqlanmadi!", 422);
+            return response(['message'=>"Joriy parol tasdiqlanmadi!"], 422);
         }
 
         $user->update([
@@ -139,7 +139,7 @@ class UserController extends Controller
         $username = $user->username;
         $user->delete();
 
-        return response(['username'=>$username], 204);
+        return response(['message'=>$username." dasturi o'chirildi."], 204);
     }
 
     public function login(Request $request){
@@ -154,7 +154,7 @@ class UserController extends Controller
 
         $user = Auth::getprovider()->retrieveByCredentials($login);
         if (!$user->is_active){
-            return response("Ushbu foydalanuvchi admin tomonidan faolsizlantirilgan.", 227);
+            return response(['message'=>"Ushbu foydalanuvchi admin tomonidan faolsizlantirilgan."], 227);
         }
         $accessToken = $user->createToken('AccessToken', [$user->status])->accessToken;
 

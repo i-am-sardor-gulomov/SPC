@@ -23,7 +23,7 @@ class CredentialController extends Controller
 
         $user_id = auth()->user()->id;
         if (Credential::where(['user_id'=>$user_id, 'app_id'=>$app->id])->exists()){
-            return response("Bu loyiha uchun allaqachon ma'lumotlaringizni biriktirgansiz.", 422);
+            return response(['message'=>"Bu loyiha uchun allaqachon ma'lumotlaringizni biriktirgansiz."], 422);
         }     
 
         $credential = Credential::create([
@@ -32,7 +32,7 @@ class CredentialController extends Controller
             'password'=>Crypt::encryptstring($request->password),
             'user_id'=>$user_id
         ]);
-        return response("Ma'lumotlar muvaffaqqiyatli biriktirildi", 201);
+        return response(['message'=>"Ma'lumotlar muvaffaqqiyatli biriktirildi"], 201);
     }
 
     /**
@@ -47,7 +47,7 @@ class CredentialController extends Controller
             'user_id'=>auth()->user()->id,
             'app_id'=>$app->id
         ])->first();
-        if (is_null($credential)){return response("Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz.", 404);}
+        if (is_null($credential)){return response(['message'=>"Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz."], 404);}
 
         return $credential;
     }
@@ -68,11 +68,11 @@ class CredentialController extends Controller
         ])->first();
 
         if (is_null($credential)){
-            return response("Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz.", 404);
+            return response(['message'=>"Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz."], 404);
         }    
 
         if (!Hash::check($request->super_password, $user->password)){
-            return response('Parol tasdiqlanmadi.', 400);
+            return response(['message'=>'Parol tasdiqlanmadi.'], 400);
         }
 
         $credential->update([
@@ -80,7 +80,7 @@ class CredentialController extends Controller
             'password'=>Crypt::encryptString($request->password)??$credential->password,
         ]);
 
-        return response("Ma'lumotlaringiz muvaffaqqiyatli yangilandi", 200);
+        return response(['message'=>"Ma'lumotlaringiz muvaffaqqiyatli yangilandi"], 200);
     }
 
 }

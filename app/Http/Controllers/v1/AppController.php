@@ -51,7 +51,7 @@ class AppController extends Controller
     public function show(Request $request, App $app)
     {
         if (!$request->user()->tokenCan('admin') and !$app->is_active){
-            return response('Ushbu dastur admin tomonidan faolsizlantirilgan.');
+            return response(['message'=>'Ushbu dastur admin tomonidan faolsizlantirilgan.']);
         }
         return new AppResource($app);
     }
@@ -104,7 +104,7 @@ class AppController extends Controller
         $credential = Credential::where(['user_id'=>$user->id, 'app_id'=>$app->id])->first();
 
         if (is_null($credential)){
-            return response("Ushbu dastur uchun ma'lumotlar biriktirmagansiz.", 422);
+            return response(['message'=>"Ushbu dastur uchun ma'lumotlar biriktirmagansiz."], 422);
         }
 
         try{
@@ -116,17 +116,17 @@ class AppController extends Controller
             'password' => Crypt::decryptString($credential->password)
         ]);
         }catch (ConnectionException $e) {
-            return response("Dastur uchun IP yoki port xato ko'rsatilgan.", 422);
+            return response(['message'=>"Dastur uchun IP yoki port xato ko'rsatilgan."], 422);
         }catch (Exception $e) {
-            return response("Serverda xatolik.", 500);
+            return response(['message'=>"Serverda xatolik."], 500);
         }
 
         if ($response->clientError()){
-            return response("Xatolik yuz berdi. Dasturga biriktirgan ma'lumotlar xato bo'lishi mumkin.", 400);
+            return response(['message'=>"Xatolik yuz berdi. Dasturga biriktirgan ma'lumotlar xato bo'lishi mumkin."], 400);
         }
 
         if ($response->serverError()){
-            return response('Tanlangan dastur serverida xatolik yuz berdi. Dastur xozirda mavjudligini tekshiring.', 500);
+            return response(['message'=>'Tanlangan dastur serverida xatolik yuz berdi. Dastur xozirda mavjudligini tekshiring.'], 500);
         }
 
         return response(['token'=>$response['access_token']], 200) ;
