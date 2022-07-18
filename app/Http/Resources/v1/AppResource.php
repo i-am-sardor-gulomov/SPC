@@ -41,17 +41,6 @@ class AppResource extends JsonResource
             'is_active' => $this->is_active,
         ];
 
-        if ($user->status=='admin'){
-            $admin_resource = [
-                'IP'=>$this->IP,
-                'port'=>$this->port,
-                'grant_type'=>$this->grant_type,
-                'client_id'=>$this->client_id,
-                'client_secret'=>$this->client_secret,
-            ];
-            $resource = array_merge($resource, $admin_resource);
-        }
-
         return $resource;
     }
 }

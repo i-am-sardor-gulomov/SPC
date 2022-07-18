@@ -25,7 +25,6 @@ Route::middleware('auth:api')->group(function(){
     //App ustida amallar
     Route::get('apps', [AppController::class, 'index']);                         //200
     Route::get('apps/{app}', [AppController::class, 'show']);                    //200
-    Route::get('apps/{app}/token', [AppController::class, 'getToken']);          //200
 });
 
 
