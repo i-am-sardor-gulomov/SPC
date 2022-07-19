@@ -49,7 +49,7 @@ class CredentialController extends Controller
         ])->first();
         if (is_null($credential)){return response(['message'=>"Ushbu loyihaga ma'lumotlaringizni biriktirmagansiz."], 404);}
 
-        return response(['login'=>$credential->login, "password"=>Crypt::decryptString($credential->password)], 200);
+        return response(['login'=>$credential->login, "password"=>Crypt::decryptString($credential->password), "app_id"=>$app->id], 200);
     }
 
     /**
