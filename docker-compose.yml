@@ -1,0 +1,36 @@
+version: '3'
+services:
+  backend:
+    build: .
+    command: [ "sh", "./deploy/entrypoint.sh" ]
+    ports:
+      - 8808:80
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=spc_db
+      - DB_USERNAME=spc_user
+      - DB_PASSWORD=spc_pass
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_DB=spc_db
+      - POSTGRES_PASSWORD=spc_pass
+      - POSTGRES_USER=spc_user
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "spc_user", "-d", "spc_db"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - psqldata:/var/lib/postgresql/data
+
+volumes:
+  psqldata:
