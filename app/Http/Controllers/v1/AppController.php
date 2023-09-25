@@ -70,11 +70,6 @@ class AppController extends Controller
             'description' => $request->description??$app->description,
             'url' => $request->url??$app->url,
             'icon' => $request->icon??$app->icon,
-            'IP' => $request->IP??$app->IP,
-            'port' => $request->port??$app->port,
-            'grant_type' => $request->grant_type??$app->grant_type,
-            'client_id' => $request->client_id??$app->client_id,
-            'client_secret' => $request->client_secret??$app->client_secret,
         ]);
 
         return $app;
@@ -99,37 +94,4 @@ class AppController extends Controller
         return response(['name'=>$name], 204);
     }
 
-    public function getToken(Request $request, App $app){
-        $user = auth()->user();
-        $credential = Credential::where(['user_id'=>$user->id, 'app_id'=>$app->id])->first();
-
-        if (is_null($credential)){
-            return response(['message'=>"Ushbu dastur uchun ma'lumotlar biriktirmagansiz."], 422);
-        }
-
-        try{
-        $response = Http::post('http://'.$app->IP.':'.$app->port.'/oauth/token', [
-            'grant_type'=> $app->grant_type,
-            'client_id'=> $app->client_id,
-            'client_secret'=> $app->client_secret,
-            'username' => $credential->login,
-            'password' => Crypt::decryptString($credential->password)
-        ]);
-        }catch (ConnectionException $e) {
-            return response(['message'=>"Dastur uchun IP yoki port xato ko'rsatilgan."], 422);
-        }catch (Exception $e) {
-            return response(['message'=>"Serverda xatolik."], 500);
-        }
-
-        if ($response->clientError()){
-            return response(['message'=>"Xatolik yuz berdi. Dasturga biriktirgan ma'lumotlar xato bo'lishi mumkin."], 400);
-        }
-
-        if ($response->serverError()){
-            return response(['message'=>'Tanlangan dastur serverida xatolik yuz berdi. Dastur xozirda mavjudligini tekshiring.'], 500);
-        }
-
-        return response(['token'=>$response['access_token']], 200) ;
-
-    }
 }

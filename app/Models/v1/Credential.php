@@ -16,7 +16,4 @@ class Credential extends Model
         'app_id'
     ];
 
-    protected $hidden = [
-        'password'
-    ];
 }

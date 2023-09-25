@@ -28,12 +28,7 @@ class StoreAppRequest extends FormRequest
             'name' => 'required|string',
             'description' => 'string',
             'url' => 'required|string',
-            'IP' => 'required|ip',
-            'port' => 'required|string',
             'icon' => 'string|required',
-            'grant_type' => 'required|string',
-            'client_id' => 'required|numeric',
-            'client_secret' => 'required|string',
         ];
     }
 }
