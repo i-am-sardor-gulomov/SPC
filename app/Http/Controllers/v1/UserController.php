@@ -33,12 +33,12 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $password_hashed = Hash::make($request['password']);
+        $password_hashed = Hash::make($request['password'] ?? "12");
         $user = User::create([
-            'fullname'=>$request->fullname,
-            'phone'=>$request->phone,
-            'username'=>$request->username,
-            'password'=>$password_hashed,
+            'fullname'=>$request->fullname ?? '1',
+            'phone'=>$request->phone ?? '1',
+            'username'=>$request->username ?? '1',
+            'password'=>$password_hashed ?? '1',
             'status'=>$request->status??'developer'
         ]);
 
@@ -143,7 +143,8 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
-        $login = $request->validate([
+    //    return dd(Hash::make(123456)); 
+           $login = $request->validate([
             'username'=>'required|exists:users,username',
             'password'=>'required|min:6'
         ]);

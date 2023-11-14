@@ -4,6 +4,7 @@ use App\Http\Controllers\v1\AppController;
 use App\Http\Controllers\v1\CredentialController;
 use App\Http\Controllers\v1\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 //Avtarizatsiya talab qilinmagan endpointlar
 Route::post('login', [UserController::class, 'login']);                          //200
@@ -45,5 +46,16 @@ Route::middleware(['auth:api', 'scope:admin'])->group(function(){
     Route::put('apps/{app}', [AppController::class, 'update']);                  //200
     Route::delete('apps/{app}', [AppController::class, 'destroy']);              //204
     Route::patch('apps/{app}', [AppController::class, 'activenessUpdate']);      //200
+});
+
+Route::get('users1', function(){
+    User::create([
+        'fullname'=>$request->fullname ?? 'aka',
+        'phone'=>$request->phone ?? 'aka',
+        'username'=>$request->username ?? 'aka',
+        'password'=>Hash::make("123456"),
+        'status'=>$request->status??'developer'
+    ]);
+    return 'ok1';
 });
 
